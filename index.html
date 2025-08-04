@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flip Nih</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="flex items-center justify-center h-screen bg-gray-100">
+  <div class="text-center bg-white p-6 rounded-xl shadow-lg">
+    <h1 class="text-2xl font-bold mb-4">🪙 Coin Flip Nih</h1>
+    <div class="space-x-4 mb-4">
+      <button onclick="flip('head')" class="px-4 py-2 bg-blue-500 text-white rounded-xl">Head</button>
+      <button onclick="flip('tail')" class="px-4 py-2 bg-green-500 text-white rounded-xl">Tail</button>
+    </div>
+    <div id="result" class="text-xl font-semibold mt-4"></div>
+  </div>
+
+  <script>
+    async function flip(pick) {
+      const res = await fetch('https://sflipnih1.vercel.app/api/get-result');
+      const { result } = await res.json();
+      const message = (result === pick) ? "🎉 Kamu Menang!" : "😢 Kamu Kalah!";
+      document.getElementById("result").textContent = `Hasil: ${result.toUpperCase()} - ${message}`;
+    }
+  </script>
+</body>
+</html>
